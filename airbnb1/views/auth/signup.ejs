@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-[oklch(73.7%_0.021_106.9)]"> 
+                        
+    
+
+ 
+  
+
+  <%- include('../partials/nav')%>
+   
+ 
+  <br>
+  <br>
+
+    <!-- 🔥 Form Card -->
+
+    <div class="min-h-16 flex justify-center items-center">
+
+    <div class="bg-white  shadow-2xl rounded-2xl p-6 w-full max-w-md "> 
+
+        <!-- Heading -->
+        <h1 class=" text-3xl font-bold text-center 
+                   bg-gradient-to-r from-indigo-600 to-pink-500 
+                   text-transparent bg-clip-text mb-6">
+          Signup here
+        </h1>
+
+        <!-- Form -->
+        <form action="/signup" method="POST" class="space-y-5">
+        <!-- <% if ( typeof errorMessages!== 'undefined' &&  errorMessages && errorMessages.length >0){// mistake hi es me 
+            %> <ul class="list-disc list -inside space-y-1">
+                <% errorMessages.forEach(errorMessages =>{ %>
+                 <li> <%= errorMessages %></li>
+               <% }) %>
+            </ul>
+         <% } %> -->
+         <%- include('../partials/errormessages')%>
+        
+                  <input 
+                    type="text" 
+                    name="firstName" 
+                    placeholder=" first Name"
+                    
+                    value="<%= typeof oldInput !== 'undefined' ? oldInput.firstName: ''  %>"
+                    class="w-full px-4 py-3 border-2 border-gray-300 
+                           rounded-lg focus:outline-none 
+                           focus:border-indigo-500 
+                           focus:ring-2 focus:ring-indigo-200 
+                           transition duration-300"
+                />
+<input 
+                    type="text" 
+                    name="lastName" 
+                    placeholder="Last Name"
+                    value="<%= typeof oldInput !== 'undefined' ? oldInput.lastName: ''  %>"
+                    
+                    
+                    class="w-full px-4 py-3 border-2 border-gray-300 
+                           rounded-lg focus:outline-none 
+                           focus:border-indigo-500 
+                           focus:ring-2 focus:ring-indigo-200 
+                           transition duration-300"
+                />
+                <input 
+                    type="email" 
+                    name="email" 
+                    placeholder="Enter your email"
+                    
+                    value="<%= typeof oldInput !== 'undefined' ? oldInput.email: ''  %>"
+                    class="w-full px-4 py-3 border-2 border-gray-300 
+                           rounded-lg focus:outline-none 
+                           focus:border-indigo-500 
+                           focus:ring-2 focus:ring-indigo-200 
+                           transition duration-300"
+                />
+                 <input 
+                    type="password" 
+                    name="password" 
+                    placeholder="Password"
+                    
+                    value="<%=   typeof oldInput !== 'undefined' ? oldInput.password: ''  %>"
+                    class="w-full px-4 py-3 border-2 border-gray-300 
+                           rounded-lg focus:outline-none 
+                           focus:border-indigo-500 
+                           focus:ring-2 focus:ring-indigo-200 
+                           transition duration-300"
+                />
+                 <input 
+                    type="password" 
+                    name="confirm_password" 
+                    placeholder="Confirm Password"
+                    
+                value="<%= typeof oldInput !== 'undefined' ? oldInput.confirm_password: ''  %>"
+                    class="w-full px-4 py-3 border-2 border-gray-300 
+                           rounded-lg focus:outline-none 
+                           focus:border-indigo-500 
+                           focus:ring-2 focus:ring-indigo-200 
+                           transition duration-300"
+                />
+
+                <!-- User Type -->
+<div>
+    <label class="block text-gray-700 font-medium mb-2">
+        Select User Type
+    </label>
+
+    <div class="flex gap-6">
+        <label class="flex items-center gap-2">
+            <input
+                type="radio"
+                name="userType"
+                value="guest"
+                <%= typeof oldInput !== 'undefined' && oldInput.userType === 'guest'? 'checked': ''  %>
+                
+                class="w-4 h-4"
+            />
+            Guest
+        </label>
+
+        <label class="flex items-center gap-2">
+            <input
+                type="radio"
+                name="userType"
+                value="host"
+                <%= typeof oldInput !== 'undefined' && oldInput.userType === 'host'? 'checked': ''  %>
+                
+                class="w-4 h-4"
+            />
+            Host
+        </label>
+    </div>
+</div>
+
+<!-- Terms & Conditions -->
+<div class="flex items-start gap-2">
+    <input
+        type="checkbox"
+        id="terms"
+        name="terms"
+        required
+        class="mt-1 w-4 h-4"
+    />
+
+    <label for="terms" class="text-gray-600 text-sm">
+        I agree to the
+        <a href="/terms" class="text-indigo-600 hover:underline">
+            Terms & Conditions
+        </a>
+    </label>
+</div>
+                  <!-- Submit Button -->
+            <input
+                type="submit"
+                value="Sign me up"
+                class="w-full bg-green-500 text-white py-3 
+                       rounded-lg font-semibold shadow-md 
+                       hover:bg-indigo-800 
+                       transition duration-300">
+                
+          </input>
+
+                
+            </div>
+
+          
+
+        </form>
+
+    </div>
+  </div>
+
+</body>
+</html>

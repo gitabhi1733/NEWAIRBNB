@@ -1,0 +1,41 @@
+<%- include('partials/head') %>
+</head>
+
+<body class="bg-gray-100">
+
+    <!-- Navbar  this navbar to achive in other fils-->
+  <%- include('partials/nav')%>
+
+
+    <!--  Heading Section -->
+    <section class="text-center mt-10">
+        <h2 class="text-4xl font-bold 
+                   bg-gradient-to-r from-indigo-600 to-pink-500 
+                   text-transparent bg-clip-text">
+            Welcome to Hamara Airbnb
+         </h2>
+
+        
+    </section>
+
+
+    <!--  Home List -->
+    <div class="max-w-3xl mx-auto mt-10 space-y-6 px-6">
+        <% home.forEach(home => { %>
+            <div class="bg-white p-5 rounded-xl shadow-md 
+                        hover:shadow-xl transition duration-300">
+                <h1 class="text-xl font-semibold text-gray-800">
+                    <%= home.houseName %>
+                </h1>
+
+            </div>
+        <% }); %>
+    </div>
+
+<!-- new chech item to -->
+ 
+
+    
+
+</body>
+</html>

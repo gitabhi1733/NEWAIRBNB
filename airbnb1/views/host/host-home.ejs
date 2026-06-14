@@ -1,0 +1,139 @@
+
+<%- include('../partials/head') %>
+</head>
+
+ <!-- <body class="bg-slate-100 min-h-screen">  -->
+     <body class="min-h-screen bg-slate-950
+             bg-[radial-gradient(circle_at_top_left,_#4f46e5,_transparent_50%),radial-gradient(circle_at_bottom_right,_#ec4899,_transparent_30%)]"> 
+                   
+    
+     
+       
+
+
+    <!-- Navbar -->
+    <%- include('../partials/nav') %>
+
+    <!-- Hero Section -->
+    <section class="text-center py-12">
+        
+        <h1 class="text-6xl font-extrabold
+           text-transparent bg-clip-text
+           bg-gradient-to-r
+           from-blue-400
+           via-cyan-400
+           to-indigo-500
+           drop-shadow-[0_0_20px_rgba(59,130,246,0.7)]">
+
+    My Hosted Homes
+</h1>
+
+        <p class="mt-3 text-gray-500 text-lg">
+            Manage, edit and organize your Airbnb listings
+        </p>
+    </section>
+
+    <!-- Cards Grid -->
+    <div class="max-w-7xl mx-auto px-6 pb-12">
+
+        <% if(home.length === 0){ %>
+
+            <div class="text-center mt-20">
+                <h2 class="text-3xl font-bold text-gray-700">
+                    No Homes Added Yet
+                </h2>
+
+                <p class="text-gray-500 mt-3">
+                    Start hosting by adding your first property.
+                </p>
+
+                <a href="/add-home"
+                   class="inline-block mt-6 px-6 py-3 bg-emerald-500 text-white rounded-xl shadow-lg hover:bg-emerald-600 transition">
+                    Add Home
+                </a>
+            </div>
+
+        <% } else { %>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <% home.forEach(home => { %>
+
+            <div class="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-500 group">
+
+                <!-- Image -->
+                <div class="relative overflow-hidden">
+
+                    <img
+                        src="<%= home.photoUrl %>"
+                        alt="<%= home.houseName %>"
+                        class="w-full h-64 object-cover group-hover:scale-110 transition duration-700"
+                    >
+
+                    <!-- Rating Badge -->
+                    <div class="absolute top-4 right-4 bg-white px-3 py-1 rounded-full shadow-md">
+                        ⭐ <span class="font-semibold"><%= home.rating %></span>
+                    </div>
+
+                </div>
+
+                <!-- Card Content -->
+                <div class="p-6">
+
+                    <h2 class="text-2xl font-bold text-slate-800">
+                        <%= home.houseName %>
+                    </h2>
+
+                    <p class="text-gray-500 mt-2">
+                        📍 <%= home.location %>
+                    </p>
+
+                    <div class="mt-4">
+                        <span class="text-2xl font-bold text-indigo-600">
+                            ₹<%= home.price %>
+                        </span>
+                        <span class="text-gray-400">
+                            / night
+                        </span>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="flex gap-3 mt-6">
+
+                        <a href="/host/edit-home/<%= home._id %>?editing=true"
+                           class="flex-1 text-center py-3 rounded-xl bg-yellow-400 text-white font-semibold hover:bg-yellow-500 transition">
+                            ✏️ Edit
+                        </a>
+
+                        <form
+                            action="/host/delete-home/<%= home._id %>"
+                            method="POST"
+                            class="flex-1"
+                        >
+                            <button
+                                type="submit"
+                                class="w-full py-3 rounded-xl bg-red-500 text-white font-semibold hover:bg-red-600 transition"
+                            >
+                                🗑 Delete
+                            </button>
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <% }) %>
+
+        </div>
+
+        <% } %>
+
+    </div>
+
+</body>
+</html>
+
+
+
