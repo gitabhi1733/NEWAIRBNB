@@ -1,7 +1,8 @@
 
-const {check, validationResult} = require('express-validator');
+const {check, validationResult} = require('express-validator'); 
 const User = require('./models/User');
 const bcrypt = require("bcrypt");
+
 exports.getLogin = (req, res, next) => {
   res.render("auth/login", { pageTitel: "page found", isloggedIn: false });
 };
@@ -32,12 +33,7 @@ exports.postlogin = async (req, res, next) => {
     if (!isMatch) {
       throw new Error("Password does not match");
     }
-    // req.session.isloggedIn = true;
     
-    //  req.session.user = user;
-
-    //  await req.session.save();
-    //  res.redirect("/");
     req.session.isloggedIn = true;
     req.session.user = {
       _id: user._id,
@@ -115,9 +111,6 @@ const USERTYPE = check('userType')
   .withMessage('user type is invalid')
 
     
-
-
-
 exports.postSignup = [
   firstNameValidator,
   LASTNAME,
@@ -179,6 +172,7 @@ exports.postSignup = [
    
   },
 ];
+
 exports.postlogout = (req, res, next) => {
   req.session.destroy();
   res.redirect("/login");

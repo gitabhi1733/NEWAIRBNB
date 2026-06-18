@@ -1,4 +1,7 @@
 const express = require("express");
+require("dotenv").config();
+console.log(+process.env.MONGO_URL);
+const MONGO_URL = process.env.MONGO_URL;
 
 const app = express();
 const storerouter = require("./router/storerouter");
@@ -11,16 +14,14 @@ const { hostrouter } = require("./router/hostRouter");
 const { authRouter } = require("./router/authRouter");
 app.set("view engine", "ejs");
 app.set("views", "views");
-//const { mongoClient } = require("./util/database-util");
+
+//const MONGurl = "mongodb://localhost:27017/airbnb";
 const session = require("express-session");
 const mongodb_session = require("connect-mongodb-session");
-const MONGurl = "mongodb://localhost:27017/airbnb";
-
-
 const MongoDBStore = require("connect-mongodb-session")(session);
 
 const store = new MongoDBStore({
-  uri: MONGurl,
+  uri: MONGO_URL,
   collection: "sessions",
 });
 
@@ -28,29 +29,20 @@ store.on("error", (error) => {
   console.log("Session Store Error:", error);
 });
 
-
-
 const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(
   session({
     secret: "my secret",
-    resave: false,
+    resave: false,                
     saveUninitialized: true,
-   store: store,
+    store: store,
   }),
 );
 
-// app.use((req, res, next) => {
 
-//   const cookie = req.get("Cookie");
-//   console.log(cookie && cookie.split("=")[1] === "true");
 
-//   req.isloggedIn = cookie && cookie.split("=")[1] === "true";
-
-//   next();
-// });
 app.use((req, res, next) => {
   res.locals.isloggedIn = req.session.isloggedIn;
   res.locals.user = req.session.user;
@@ -59,18 +51,19 @@ app.use((req, res, next) => {
 
 app.use("/host", hostrouter);
 
-
 app.use(express.static(path.join(rootDir, "public")));
-//app.use(express.urlencoded({ extended: true }));
+
 
 app.use(storerouter);
 app.use(hostrouter);
 app.use(authRouter);
 
 const PORT = 4000;
-mongoose.connect(MONGurl).then(() => {
+
+mongoose.connect(MONGO_URL).then(() => {
   console.log("connect");
   app.listen(PORT, () => {
     console.log(`server runnig at : http://localhost:${PORT}`);
   });
 });
+
