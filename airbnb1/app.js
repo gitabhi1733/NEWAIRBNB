@@ -15,7 +15,6 @@ const { authRouter } = require("./router/authRouter");
 app.set("view engine", "ejs");
 app.set("views", "views");
 
-//const MONGurl = "mongodb://localhost:27017/airbnb";
 const session = require("express-session");
 const mongodb_session = require("connect-mongodb-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
